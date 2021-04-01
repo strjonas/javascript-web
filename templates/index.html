@@ -1,55 +1,70 @@
 <html>
+  <head>
+    <title>games</title>
+    <script defer src="../static/snake.js"></script>
+    <script defer type="module" src="../static/tictactoe.js"></script>
+    <script defer src="../static/jumpnrun.js"></script>
+    <script defer type="module" src="../static/index.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/index.css"
+      media="screen"
+    />
+  </head>
 
-    <head>
-        <title> games </title>
-        <script defer src="../static/snake.js"></script>
-        <script defer type="module" src="../static/tictactoe.js"></script>
-        <script defer  src="../static/jumpnrun.js"></script>
-        <script defer type="module" src="../static/index.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/index.css" media="screen"/>
-        
-    </head>
+  <body>
+    <div class="main-main-container">
+      <div class="tictactoe-tag">TIC TAC TOE</div>
+      <div class="jumpnrun-tag-container">
+        <div class="jumpnrun-tag">JUMP N RUN</div>
+        <button class="snake-start" onclick="jump_start()">Start</button>
+      </div>
 
-    <body>
-        <div class="main-main-container">
-            <div class="tictactoe-tag"> TIC TAC TOE </div>
-            <div class="jumpnrun-tag-container">
-                <div class="jumpnrun-tag">JUMP N RUN</div>
-                <button class="snake-start" onclick="jump_start()">Start</button>
-            </div>
-            
-            <div class="snake-tag-container">
-                <div class="snake-tag">SNAKE</div>
-                <button class="snake-start" onclick="snake_start()">Start</button>
-            </div>
-            
-            <div class="main-container tiktactoe" id="main-container">
+      <div class="snake-tag-container">
+        <div class="snake-tag">SNAKE</div>
+        <button class="snake-start" onclick="snake_start()">Start</button>
+      </div>
 
+      <div class="main-container tiktactoe" id="main-container">
+        <div class="rborder border1" id="1"></div>
+        <div class="rborder border2" id="2"></div>
+        <div class="lborder border3" id="3"></div>
+        <div class="lborder border4" id="4"></div>
+        <button class="container-buttons button1" onclick="buttonClick(1)">
+          1
+        </button>
+        <button class="container-buttons button2" onclick="buttonClick(2)">
+          2
+        </button>
+        <button class="container-buttons button3" onclick="buttonClick(3)">
+          3
+        </button>
+        <button class="container-buttons button4" onclick="buttonClick(4)">
+          4
+        </button>
+        <button class="container-buttons button5" onclick="buttonClick(5)">
+          5
+        </button>
+        <button class="container-buttons button6" onclick="buttonClick(6)">
+          6
+        </button>
+        <button class="container-buttons button7" onclick="buttonClick(7)">
+          7
+        </button>
+        <button class="container-buttons button8" onclick="buttonClick(8)">
+          8
+        </button>
+        <button class="container-buttons button9" onclick="buttonClick(9)">
+          9
+        </button>
+      </div>
 
-                <div class="rborder border1" id="1"></div>
-                <div class="rborder border2" id="2"></div>
-                <div class="lborder border3" id="3"></div>
-                <div class="lborder border4" id="4"></div>
-                <button class="container-buttons button1" onclick="buttonClick(1)">1</button>
-                <button class="container-buttons button2" onclick="buttonClick(2)">2</button>
-                <button class="container-buttons button3" onclick="buttonClick(3)">3</button>
-                <button class="container-buttons button4" onclick="buttonClick(4)">4</button>
-                <button class="container-buttons button5" onclick="buttonClick(5)">5</button>
-                <button class="container-buttons button6" onclick="buttonClick(6)">6</button>
-                <button class="container-buttons button7" onclick="buttonClick(7)">7</button>
-                <button class="container-buttons button8" onclick="buttonClick(8)">8</button>
-                <button class="container-buttons button9" onclick="buttonClick(9)">9</button>
-
-            </div>
-
-            <div class="snake-container">
-
-            </div>
-            <div class="jumpnrun-container">
-                    <div class="field"></div>
-                    <canvas></canvas>
-            </div>
-        </div>
-    </body>
-
+      <div class="snake-container" id="snake-container"></div>
+      <div class="jumpnrun-container" id="jumpnrun-container">
+        <div class="field"></div>
+        <canvas></canvas>
+      </div>
+    </div>
+  </body>
 </html>
