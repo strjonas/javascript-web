@@ -10,6 +10,7 @@ function loose() {
   direction = "up";
   food = null;
   run = false;
+  document.getElementById("snake_start").innerHTML = "Start";
   alert("You lost!");
 }
 
@@ -49,10 +50,6 @@ function update() {
         loose();
       }
     });
-  }
-
-  if (false) {
-    loose();
   }
 
   if (food == null) {
@@ -107,13 +104,28 @@ function snake_main(currenTime) {
   lastRenderTime = currenTime;
 }
 
+let ss_snake = "start";
+
 function snake_start() {
-  jump_stop()
+    document.getElementById("snake_start").innerHTML = "Stop";
+    if(ss_snake == "stop"){
+        snake_stop();
+        return;
+    }
+    ss_snake = "stop";
+  jump_stop();
   run_jump = false;
   run = true;
   window.requestAnimationFrame(snake_main);
 }
 
 function snake_stop() {
+    document.getElementById("snake_start").innerHTML = "Start";
+    ss_snake="start";
+    lastRenderTime = 0;
+  snake = [[10, 10]];
+  direction = "up";
+  food = null;
+  run = false;
   run = false;
 }

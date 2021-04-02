@@ -2,6 +2,13 @@ window.onresize = function (event) {
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
   if (screenHeight > screenWidth) {
+    context.canvas.height = screenWidth;
+    context.canvas.width = screenWidth;
+  } else {
+    context.canvas.height = screenHeight;
+    context.canvas.width = screenHeight;
+  }
+  if (screenHeight > screenWidth) {
     document
       .getElementById("main-container")
       .setAttribute("style", `width:${screenWidth}px;height:${screenWidth}px`);

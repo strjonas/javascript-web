@@ -131,15 +131,22 @@ function jump_draw() {
 
   context.fillStyle = "#ff0000"; // hex for red
   context.beginPath();
-  context.arc(rectangle.x, rectangle.y, rectangle.radius,0, Math.PI * 2, false);
+  context.arc(
+    rectangle.x,
+    rectangle.y,
+    rectangle.radius,
+    0,
+    Math.PI * 2,
+    false
+  );
   context.fill();
   const newArr = [];
   context.fillStyle = "#fff000";
   enemyList.forEach((ene) => {
     if (ene.x > -30) newArr.push(ene);
-    const dist = Math.hypot(ene.x - rectangle.x, ene.y - rectangle.y)
-    if (dist - ene.radius - rectangle.radius < 1){
-        youLoose()
+    const dist = Math.hypot(ene.x - rectangle.x, ene.y - rectangle.y);
+    if (dist - ene.radius - rectangle.radius < 1) {
+      youLoose();
     }
     ene.update();
     ene.draw();
@@ -149,24 +156,7 @@ function jump_draw() {
 }
 
 function youLoose() {
-  enemyList = [];
-  run_jump = false;
-  VELOCITY = 5;
-  map_vel = 80;
-  lastRenderTime = 0;
-  index = 0;
-  context.fillStyle = "#232323";
-  const screenHeight = window.innerHeight / 2;
-  const screenWidth = window.innerWidth / 2;
-  if (screenHeight > screenWidth) {
-    context.fillRect(0, 0, screenWidth, screenWidth);
-  } else {
-    context.fillRect(0, 0, screenHeight, screenHeight);
-  }
-  mapindex = 0;
   jump_stop();
-  rectangle.x = 50;
-  rectangle.y = 100;
   alert("You lost!");
 }
 
@@ -188,7 +178,15 @@ window.addEventListener("keyup", controller.keyListener);
 
 var loop;
 
+let ss = "start";
+
 function jump_start() {
+  if (ss == "stop") {
+    jump_stop();
+    return;
+  }
+  document.getElementById("jump_start").innerHTML = "Stop";
+  ss = "stop";
   VELOCITY = 5;
   snake_stop();
   loop = setInterval(jump_draw, 10);
@@ -198,6 +196,25 @@ function jump_start() {
 }
 
 function jump_stop() {
+  ss = "start";
+  document.getElementById("jump_start").innerHTML = "Start";
   clearInterval(loop);
+  enemyList = [];
+  run_jump = false;
+  VELOCITY = 5;
+  map_vel = 80;
+  lastRenderTime = 0;
+  index = 0;
+  context.fillStyle = "#232323";
+  const screenHeight = window.innerHeight / 2;
+  const screenWidth = window.innerWidth / 2;
+  if (screenHeight > screenWidth) {
+    context.fillRect(0, 0, screenWidth, screenWidth);
+  } else {
+    context.fillRect(0, 0, screenHeight, screenHeight);
+  }
+  rectangle.x = 50;
+  rectangle.y = 100;
+  mapindex = 0;
   run_jump = false;
 }

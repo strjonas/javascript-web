@@ -1,6 +1,5 @@
 var player = 1;
 
-
 var gameMap = {
   1: "1",
   2: "2",
