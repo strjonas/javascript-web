@@ -3,6 +3,8 @@ var run_jump = false;
 var VELOCITY = 5;
 var map_vel = 80;
 
+const B_COLOR = "#232323";
+
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
@@ -119,7 +121,7 @@ function jump_draw() {
     rectangle.y = 400 - 16 - 32;
     rectangle.y_velocity = 0;
   }
-  context.fillStyle = "#232323";
+  context.fillStyle = B_COLOR;
 
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
@@ -205,7 +207,7 @@ function jump_stop() {
   map_vel = 80;
   lastRenderTime = 0;
   index = 0;
-  context.fillStyle = "#232323";
+  context.fillStyle = B_COLOR;
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
   if (screenHeight > screenWidth) {
