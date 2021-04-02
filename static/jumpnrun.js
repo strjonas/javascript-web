@@ -1,9 +1,7 @@
-const gameField =
-  "_____________________#______________________________________#__________________\
-__________#____________________________________#_____________________________#________________________________\
-_______#_________________________________________#_______________________________#_____________________________#_\
-_____________________________#_______________________#__________________#__________________#_______________#";
+const gameField = "_____________#____________#_________#_______#__________";
 var run_jump = false;
+var VELOCITY = 5;
+var map_vel = 80;
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -21,22 +19,24 @@ function setGameField() {
   index += 1;
   var c = gameField.slice(index, index + 20);
   field.innerHTML = c;
-  if (index > fieldL) index = 0;
+  if (index > fieldL) {
+    index = 0;
+    VELOCITY += 1;
+    map_vel -= 5;
+  }
 }
 
-//enemy classs (the reactangles that come onto the player rectangle)
 class enemys {
-  constructor(x, y, x_vel, width, height, color) {
+  constructor(x, y, x_vel, radius, color) {
     this.x = x;
     this.y = y;
     this.x_vel = x_vel;
-    this.width = width;
-    this.height = height;
+    this.radius = radius;
     this.color = color;
   }
   draw() {
     context.beginPath();
-    context.rect(this.x, this.y, this.width, this.height);
+    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     context.fillStyle = this.color;
     context.fill();
   }
@@ -45,18 +45,20 @@ class enemys {
   }
 }
 
-const enemyList = [];
-
-function animate() {
-  if (run_jump) {
-    requestAnimationFrame(animate);
-  }
-}
+let enemyList = [];
 
 function new_enemy() {
-  const ene = new enemys(420, 352, 5, 32, 32, "yellow");
+  let oneortwo = Math.round(Math.random());
+  let size = Math.round(Math.random() * 10 + 10);
+  const ene = new enemys(
+    510,
+    oneortwo == 1 ? 352 : 300,
+    VELOCITY,
+    size,
+    size,
+    "yellow"
+  );
   enemyList.push(ene);
-  console.log("new enemy");
 }
 
 function jump_update() {
@@ -86,9 +88,8 @@ if (screenHeight > screenWidth) {
 }
 
 rectangle = {
-  height: 32,
+  radius: 20,
   jumping: true,
-  width: 32,
   x: 50,
   y: 100,
   y_velocity: 0,
@@ -107,10 +108,10 @@ controller = {
 
 function jump_draw() {
   if (controller.up && rectangle.jumping == false) {
-    rectangle.y_velocity -= 20;
+    rectangle.y_velocity -= 25;
     rectangle.jumping = true;
   }
-  rectangle.y_velocity += 1.5; // gravity
+  rectangle.y_velocity += 0.8; // gravity
   rectangle.y += rectangle.y_velocity;
   rectangle.y_velocity *= 0.9; // friction
   if (rectangle.y > 400 - 16 - 32) {
@@ -118,7 +119,6 @@ function jump_draw() {
     rectangle.y = 400 - 16 - 32;
     rectangle.y_velocity = 0;
   }
-
   context.fillStyle = "#232323";
 
   const screenHeight = window.innerHeight / 2;
@@ -131,22 +131,42 @@ function jump_draw() {
 
   context.fillStyle = "#ff0000"; // hex for red
   context.beginPath();
-  context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+  context.arc(rectangle.x, rectangle.y, rectangle.radius,0, Math.PI * 2, false);
   context.fill();
-
+  const newArr = [];
+  context.fillStyle = "#fff000";
   enemyList.forEach((ene) => {
+    if (ene.x > -30) newArr.push(ene);
+    const dist = Math.hypot(ene.x - rectangle.x, ene.y - rectangle.y)
+    if (dist - ene.radius - rectangle.radius < 1){
+        youLoose()
+    }
     ene.update();
     ene.draw();
   });
 
-  //if(x_value <= (rectangle.x+rectangle.width) && x_value  <= (x_value+rectangle.width)  &&  352 <= (rectangle.y+rectangle.height) && (rectangle.y+rectangle.height) <= (352+rectangle.height) ){
-  //youLoose();
-  //}
+  enemyList = newArr;
 }
 
 function youLoose() {
-  x_value = 490;
+  enemyList = [];
+  run_jump = false;
+  VELOCITY = 5;
+  map_vel = 80;
+  lastRenderTime = 0;
+  index = 0;
+  context.fillStyle = "#232323";
+  const screenHeight = window.innerHeight / 2;
+  const screenWidth = window.innerWidth / 2;
+  if (screenHeight > screenWidth) {
+    context.fillRect(0, 0, screenWidth, screenWidth);
+  } else {
+    context.fillRect(0, 0, screenHeight, screenHeight);
+  }
+  mapindex = 0;
   jump_stop();
+  rectangle.x = 50;
+  rectangle.y = 100;
   alert("You lost!");
 }
 
@@ -155,10 +175,9 @@ function main(currenTime) {
     window.requestAnimationFrame(main);
   }
   const milliSecondsSinceLastRender = currenTime - lastRenderTime;
-  if (milliSecondsSinceLastRender < 100) {
+  if (milliSecondsSinceLastRender < map_vel) {
     return;
   }
-
   jump_update();
 
   lastRenderTime = currenTime;
@@ -170,9 +189,9 @@ window.addEventListener("keyup", controller.keyListener);
 var loop;
 
 function jump_start() {
-  //requestAnimationFrame(animate);
+  VELOCITY = 5;
   snake_stop();
-  loop = setInterval(jump_draw, 50);
+  loop = setInterval(jump_draw, 10);
   window.requestAnimationFrame(main);
   run = false;
   run_jump = true;
