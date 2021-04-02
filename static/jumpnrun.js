@@ -2,8 +2,7 @@ const gameField =
   "_____________________#______________________________________#__________________\
 __________#____________________________________#_____________________________#________________________________\
 _______#_________________________________________#_______________________________#_____________________________#_\
-_____________________________#_______________________#__________________#__________________#_______________#__\
-_________#__________#______#__________________#_______#_______#______#________#________________#____________";
+_____________________________#_______________________#__________________#__________________#_______________#";
 var run_jump = false;
 
 const sleep = (milliseconds) => {
@@ -25,24 +24,49 @@ function setGameField() {
   if (index > fieldL) index = 0;
 }
 
-var x_value;
-
-function jump_update() {
-    if (mapindex-1 >= mapLen){mapindex = 0}
-    console.log(gameField[mapindex])
-    if (gameField[mapindex] == "#"){
-        x_value = 490;
-        context.fillStyle = "#fff000"; // hex for red
-        context.beginPath();
-        context.rect(x_value, 400, rectangle.width, rectangle.height);
-    }
-    mapindex++;
-
+//enemy classs (the reactangles that come onto the player rectangle)
+class enemys {
+  constructor(x, y, x_vel, width, height, color) {
+    this.x = x;
+    this.y = y;
+    this.x_vel = x_vel;
+    this.width = width;
+    this.height = height;
+    this.color = color;
+  }
+  draw() {
+    context.beginPath();
+    context.rect(this.x, this.y, this.width, this.height);
+    context.fillStyle = this.color;
+    context.fill();
+  }
+  update() {
+    this.x -= this.x_vel;
+  }
 }
 
-function updateValue(){
-    x_value--;
-    
+const enemyList = [];
+
+function animate() {
+  if (run_jump) {
+    requestAnimationFrame(animate);
+  }
+}
+
+function new_enemy() {
+  const ene = new enemys(420, 352, 5, 32, 32, "yellow");
+  enemyList.push(ene);
+  console.log("new enemy");
+}
+
+function jump_update() {
+  if (mapindex - 1 >= mapLen) {
+    mapindex = 0;
+  }
+  if (gameField[mapindex] == "#") {
+    new_enemy();
+  }
+  mapindex++;
 }
 
 function enter_pressed(event) {}
@@ -110,11 +134,20 @@ function jump_draw() {
   context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
   context.fill();
 
-  context.fillStyle = "#fff000"; // hex for red
-  context.beginPath();
-  context.rect(x_value, 350, rectangle.width, rectangle.height);
-  context.fill();
+  enemyList.forEach((ene) => {
+    ene.update();
+    ene.draw();
+  });
 
+  //if(x_value <= (rectangle.x+rectangle.width) && x_value  <= (x_value+rectangle.width)  &&  352 <= (rectangle.y+rectangle.height) && (rectangle.y+rectangle.height) <= (352+rectangle.height) ){
+  //youLoose();
+  //}
+}
+
+function youLoose() {
+  x_value = 490;
+  jump_stop();
+  alert("You lost!");
 }
 
 function main(currenTime) {
@@ -137,17 +170,15 @@ window.addEventListener("keyup", controller.keyListener);
 var loop;
 
 function jump_start() {
-  snake_stop()
-  update_value_loop = setInterval(updateValue, 5);
-  loop = setInterval(jump_draw, 50)
+  //requestAnimationFrame(animate);
+  snake_stop();
+  loop = setInterval(jump_draw, 50);
   window.requestAnimationFrame(main);
   run = false;
   run_jump = true;
 }
 
-function jump_stop(){
-    clearInterval(loop);
-    clearInterval(update_value_loop);
-    run = false;
+function jump_stop() {
+  clearInterval(loop);
+  run_jump = false;
 }
-

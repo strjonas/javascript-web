@@ -1,8 +1,5 @@
 var player = 1;
 
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
 
 var gameMap = {
   1: "1",
