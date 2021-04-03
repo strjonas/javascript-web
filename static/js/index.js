@@ -74,6 +74,7 @@ window.onkeypress = function (event) {
 };
 
 function firstLoad(){
+  
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
   if(window.innerWidth < 1150){

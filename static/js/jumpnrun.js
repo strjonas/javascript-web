@@ -53,7 +53,7 @@ function new_enemy() {
   let oneortwo = Math.round(Math.random() * 3);
   let size = Math.round(Math.random() * 10 + 10);
   const ene = new enemys(
-    510,
+    context.canvas.height,
     oneortwo == 1 ? context.canvas.height - 150 : context.canvas.height - 100,
     VELOCITY,
     size,
@@ -96,9 +96,23 @@ controller = {
     }
   },
 };
-window.addEventListener('touchstart', function(e){
-  alert("touched");
-}, false)
+function handleStart() {
+  controller.up = true;
+}
+function handleEnd() {
+  controller.up = false;
+}
+function handleCancel() {}
+function handleMove() {}
+
+function startup() {
+  var el = document.getElementById("canvas");
+  el.addEventListener("touchstart", handleStart, false);
+  el.addEventListener("touchend", handleEnd, false);
+  el.addEventListener("touchmove", handleMove, false);
+}
+
+document.addEventListener("DOMContentLoaded", startup);
 
 function jump_draw() {
   if (controller.up && rectangle.jumping == false) {
