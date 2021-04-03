@@ -50,11 +50,11 @@ class enemys {
 let enemyList = [];
 
 function new_enemy() {
-  let oneortwo = Math.round(Math.random()*3);
+  let oneortwo = Math.round(Math.random() * 3);
   let size = Math.round(Math.random() * 10 + 10);
   const ene = new enemys(
     510,
-    oneortwo == 1 ? context.canvas.height-150 : context.canvas.height-100,
+    oneortwo == 1 ? context.canvas.height - 150 : context.canvas.height - 100,
     VELOCITY,
     size,
     size,
@@ -78,12 +78,11 @@ var canvas;
 canvas = document.querySelector("canvas");
 context = canvas.getContext("2d");
 
-
 rectangle = {
   radius: 20,
   jumping: true,
   x: 50,
-  y: context.canvas.height-100,
+  y: context.canvas.height - 100,
   y_velocity: 0,
 };
 
@@ -97,6 +96,9 @@ controller = {
     }
   },
 };
+window.addEventListener('touchstart', function(e){
+  alert("touched");
+}, false)
 
 function jump_draw() {
   if (controller.up && rectangle.jumping == false) {
@@ -106,9 +108,9 @@ function jump_draw() {
   rectangle.y_velocity += 0.8; // gravity
   rectangle.y += rectangle.y_velocity;
   rectangle.y_velocity *= 0.9; // friction
-  if (rectangle.y > context.canvas.height-50 - 16 - 32) {
+  if (rectangle.y > context.canvas.height - 50 - 16 - 32) {
     rectangle.jumping = false;
-    rectangle.y = context.canvas.height-50 - 16 - 32;
+    rectangle.y = context.canvas.height - 50 - 16 - 32;
     rectangle.y_velocity = 0;
   }
   context.fillStyle = B_COLOR;
@@ -126,17 +128,23 @@ function jump_draw() {
     false
   );
   context.fill();
-  const newArr = [];
+  let newArr = [];
   context.fillStyle = "#fff000";
-  enemyList.forEach((ene) => {
-    if (ene.x > -30) newArr.push(ene);
-    const dist = Math.hypot(ene.x - rectangle.x, ene.y - rectangle.y);
-    if (dist - ene.radius - rectangle.radius < 1) {
-      youLoose();
-    }
-    ene.update();
-    ene.draw();
-  });
+  if (enemyList.length > 0) {
+    enemyList.forEach((ene) => {
+      if (ene.x > -30) newArr.push(ene);
+      const dist = Math.hypot(ene.x - rectangle.x, ene.y - rectangle.y);
+      if (dist - ene.radius - rectangle.radius < 1) {
+        ene.update();
+        ene.draw();
+        newArr = [];
+        youLoose();
+        return;
+      }
+      ene.update();
+      ene.draw();
+    });
+  }
 
   enemyList = newArr;
 }
@@ -154,7 +162,9 @@ function main(currenTime) {
   if (milliSecondsSinceLastRender < map_vel) {
     return;
   }
-  jump_update();
+  if (run_jump) {
+    jump_update();
+  }
 
   lastRenderTime = currenTime;
 }
@@ -194,7 +204,7 @@ function jump_stop() {
   context.fillStyle = B_COLOR;
   context.fillRect(0, 0, context.canvas.height, context.canvas.height);
   rectangle.x = 50;
-  rectangle.y = context.canvas.height-100;
+  rectangle.y = context.canvas.height - 100;
   mapindex = 0;
   run_jump = false;
 }
