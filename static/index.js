@@ -1,6 +1,9 @@
 window.onresize = function (event) {
+  
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
+  console.log(screenHeight*2);
+  console.log(screenWidth*2);
   if (screenHeight > screenWidth) {
     context.canvas.height = screenWidth;
     context.canvas.width = screenWidth;
@@ -59,13 +62,41 @@ window.onkeypress = function (event) {
 };
 
 const screenHeight = window.innerHeight / 2;
-const screenWidth = window.innerWidth / 2;
-if (screenHeight > screenWidth) {
-  document
-    .getElementById("main-container")
-    .setAttribute("style", `width:${screenWidth}px;height:${screenWidth}px`);
-} else {
-  document
-    .getElementById("main-container")
-    .setAttribute("style", `width:${screenHeight}px;height:${screenHeight}px`);
-}
+  const screenWidth = window.innerWidth / 2;
+  if (screenHeight > screenWidth) {
+    context.canvas.height = screenWidth;
+    context.canvas.width = screenWidth;
+  } else {
+    context.canvas.height = screenHeight;
+    context.canvas.width = screenHeight;
+  }
+  if (screenHeight > screenWidth) {
+    document
+      .getElementById("main-container")
+      .setAttribute("style", `width:${screenWidth}px;height:${screenWidth}px`);
+    document
+      .getElementById("snake-container")
+      .setAttribute("style", `width:${screenWidth}px;height:${screenWidth}px`);
+    document
+      .getElementById("jumpnrun-container")
+      .setAttribute("style", `width:${screenWidth}px;height:${screenWidth}px`);
+  } else {
+    document
+      .getElementById("main-container")
+      .setAttribute(
+        "style",
+        `width:${screenHeight}px;height:${screenHeight}px`
+      );
+    document
+      .getElementById("snake-container")
+      .setAttribute(
+        "style",
+        `width:${screenHeight}px;height:${screenHeight}px`
+      );
+    document
+      .getElementById("jumpnrun-container")
+      .setAttribute(
+        "style",
+        `width:${screenHeight}px;height:${screenHeight}px`
+      );
+  }

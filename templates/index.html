@@ -29,82 +29,110 @@
 
   <body>
     <div class="main-main-container">
-      <div class="tictactoe-tag">TIC TAC TOE</div>
-
-      <div class="jumpnrun-tag-container">
-        <div class="row">
-          <div class="col-sm jumpnrun-tag">JUMPNRUN</div>
-          <div class="col-sm"></div>
-          <button
-            class="btn btn-outline-info col-sm snake-start"
-            id="jump_start"
-            onclick="jump_start()"
-          >
-            Start
-          </button>
-          <div class="col-sm"></div>
-          <div class="col-sm"></div>
+      <div class="jumpnrun-main-div divs">
+        <div class="jumpnrun-tag-container">
+          <div class="row">
+            <div class="col-sm jumpnrun-tag">JUMPNRUN</div>
+            <div class="col-sm"></div>
+            <button
+              class="btn btn-outline-info col-sm snake-start"
+              id="jump_start"
+              onclick="jump_start()"
+            >
+              Start
+            </button>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+          </div>
+        </div>
+        <div class="jumpnrun-container" id="jumpnrun-container">
+          <div class="field"></div>
+          <canvas></canvas>
         </div>
       </div>
 
-      <div class="container snake-tag-container">
-        <div class="row">
-          <div class="col-sm snake-tag">SNAKE</div>
-          <div class="col-sm"></div>
-          <button
-            class="btn btn-outline-info col-sm snake-start"
-            id="snake_start"
-            onclick="snake_start()"
-          >
-            Start
+      <div class="tictactoe-main-div divs">
+        <div class="tictactoe-tag">TIC TAC TOE</div>
+        <div class="main-container tiktactoe" id="main-container">
+          <div class="rborder border1" id="1"></div>
+          <div class="rborder border2" id="2"></div>
+          <div class="lborder border3" id="3"></div>
+          <div class="lborder border4" id="4"></div>
+          <button class="container-buttons button1" onclick="buttonClick(1)">
+            1
           </button>
-          <div class="col-sm"></div>
-          <div class="col-sm"></div>
+          <button class="container-buttons button2" onclick="buttonClick(2)">
+            2
+          </button>
+          <button class="container-buttons button3" onclick="buttonClick(3)">
+            3
+          </button>
+          <button class="container-buttons button4" onclick="buttonClick(4)">
+            4
+          </button>
+          <button class="container-buttons button5" onclick="buttonClick(5)">
+            5
+          </button>
+          <button class="container-buttons button6" onclick="buttonClick(6)">
+            6
+          </button>
+          <button class="container-buttons button7" onclick="buttonClick(7)">
+            7
+          </button>
+          <button class="container-buttons button8" onclick="buttonClick(8)">
+            8
+          </button>
+          <button class="container-buttons button9" onclick="buttonClick(9)">
+            9
+          </button>
         </div>
       </div>
 
-      <div class="main-container tiktactoe" id="main-container">
-        <div class="rborder border1" id="1"></div>
-        <div class="rborder border2" id="2"></div>
-        <div class="lborder border3" id="3"></div>
-        <div class="lborder border4" id="4"></div>
-        <button class="container-buttons button1" onclick="buttonClick(1)">
-          1
-        </button>
-        <button class="container-buttons button2" onclick="buttonClick(2)">
-          2
-        </button>
-        <button class="container-buttons button3" onclick="buttonClick(3)">
-          3
-        </button>
-        <button class="container-buttons button4" onclick="buttonClick(4)">
-          4
-        </button>
-        <button class="container-buttons button5" onclick="buttonClick(5)">
-          5
-        </button>
-        <button class="container-buttons button6" onclick="buttonClick(6)">
-          6
-        </button>
-        <button class="container-buttons button7" onclick="buttonClick(7)">
-          7
-        </button>
-        <button class="container-buttons button8" onclick="buttonClick(8)">
-          8
-        </button>
-        <button class="container-buttons button9" onclick="buttonClick(9)">
-          9
-        </button>
+      <div class="snake-main-div divs">
+        <div class="container snake-tag-container">
+          <div class="row">
+            <div class="col-sm snake-tag">SNAKE</div>
+            <div class="col-sm"></div>
+            <button
+              class="btn btn-outline-info col-sm snake-start"
+              id="snake_start"
+              onclick="snake_start()"
+            >
+              Start
+            </button>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+          </div>
+        </div>
+        <div class="snake-container" id="snake-container"></div>
       </div>
+    </div>
+    <footer class="footer">
+      <div class="text">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              One of three columns
+            </div>
+            <div class="col-sm">
+              One of three columns
+            </div>
+            <div class="col-sm">
+              One of three columns
+            </div>
+            <div class="col-sm">
+              One of three columns
+            </div>
+          </div>
+          <br>
+          <div class="row bottom-text">
+            <p> Website made by Jonas Strabel.</p>
+          </div>
+        </div>
+          
 
-      <div class="snake-container" id="snake-container"></div>
-      <div class="jumpnrun-container" id="jumpnrun-container">
-        <div class="field"></div>
-        <canvas></canvas>
+
       </div>
-    </div>
-    <div class="footer">
-      <div class="text"></div>
-    </div>
+    </footer>
   </body>
 </html>

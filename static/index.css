@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  overflow: auto;
 }
 
 div {
@@ -8,38 +7,56 @@ div {
 }
 
 .footer {
-  background-color: #8ccca2;
+  background-color: black;
   padding: 2%;
-  height: 5%;
+  height: 20%;
+  color:white;
+}
+
+.bottom-text{
+  font-size: 70%;
 }
 
 .text {
   text-align: center;
+  color:white;
 }
 
 .main-main-container {
   display: grid;
-  padding-left: 8%;
+  padding-left: 9%;
   padding-right: 5%;
   padding-top: 6%;
-  padding-bottom: 12%;
-  grid-template-columns: repeat(3, 5fr);
-  grid-template-rows: repeat(4, 15fr);
+  padding-bottom: 5%;
+  grid-template-columns: repeat(1, 5fr);
+  grid-template-rows: repeat(3, 1fr);
   background: #0e068b;
   background: -webkit-linear-gradient(top, #0e068b, #8ccca2);
   background: -moz-linear-gradient(top, #0e068b, #8ccca2);
   background: linear-gradient(to bottom, #0e068b, #8ccca2);
 }
 
+@media (min-width: 1150px) {
+  .main-main-container { grid-template-columns: repeat(2, 5fr); grid-template-rows: repeat(2, 1fr);}
+}
+
+@media (min-width: 1700px) {
+  .main-main-container { grid-template-columns: repeat(3, 5fr); grid-template-rows: repeat(1, 1fr);}
+}
+
+
 .tictactoe-tag {
+  padding-bottom: 20px;
   justify-content: center;
   align-items: center;
   margin: 0;
   font-size: 200%;
   font-weight: bold;
   color: white;
-  grid-row: 1;
-  grid-column: 3;
+}
+
+.divs{
+  margin: 5%;
 }
 
 .jumpnrun-tag {
@@ -53,19 +70,18 @@ div {
 }
 
 .snake-tag {
-  margin: 0;
   font-size: 200%;
   font-weight: bold;
   color: white;
   margin-right: 5%;
 }
-.snake-tag-container {
-  grid-row: 1;
-  grid-column: 1;
+.row{
+  padding-bottom: 20px;
 }
 .snake-start {
   height: 20%;
   width: 20%;
+  
 }
 .snake-container {
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -75,20 +91,12 @@ div {
   grid-template-columns: repeat(25, 5fr);
   grid-template-rows: repeat(25, 5fr);
 
-  grid-row: 2/5;
-  grid-column: 1;
   margin-right: 5%;
-}
-.jumpnrun-tag-container {
-  grid-row: 1;
-  grid-column: 2;
 }
 .jumpnrun-container {
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 5px 5px 15px 5px #000000;
   background-color: #232323;
-  grid-row: 2/5;
-  grid-column: 2;
   margin-right: 5%;
 }
 .field {
@@ -107,8 +115,6 @@ canvas {
   display: grid;
   grid-template-columns: repeat(3, 5fr);
   grid-template-rows: repeat(3, 5fr);
-  grid-row: 2/5;
-  grid-column: 3;
 }
 .rborder {
   background-color: white;
@@ -138,7 +144,7 @@ canvas {
   width: 100%;
   height: 100%;
   background-color: #232323;
-  font-size: 500%;
+  font-size: 300%;
 }
 .button1 {
   color: white;
