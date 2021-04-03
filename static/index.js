@@ -2,8 +2,20 @@ window.onresize = function (event) {
   
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
-  console.log(screenHeight*2);
-  console.log(screenWidth*2);
+  if(window.innerWidth < 1150){
+    context.canvas.height = window.innerHeight*0.8 ;
+    context.canvas.width = window.innerHeight*0.8 ;
+    document
+      .getElementById("main-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    document
+      .getElementById("snake-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    document
+      .getElementById("jumpnrun-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    return 
+  }
   if (screenHeight > screenWidth) {
     context.canvas.height = screenWidth;
     context.canvas.width = screenWidth;
@@ -61,8 +73,23 @@ window.onkeypress = function (event) {
   }
 };
 
-const screenHeight = window.innerHeight / 2;
+function firstLoad(){
+  const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
+  if(window.innerWidth < 1150){
+    context.canvas.height = window.innerHeight*0.8 ;
+    context.canvas.width = window.innerHeight*0.8 ;
+    document
+      .getElementById("main-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    document
+      .getElementById("snake-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    document
+      .getElementById("jumpnrun-container")
+      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+    return
+  }
   if (screenHeight > screenWidth) {
     context.canvas.height = screenWidth;
     context.canvas.width = screenWidth;
@@ -100,3 +127,6 @@ const screenHeight = window.innerHeight / 2;
         `width:${screenHeight}px;height:${screenHeight}px`
       );
   }
+}
+
+firstLoad();

@@ -5,6 +5,7 @@ var direction = "up";
 var food = null;
 
 function loose() {
+  ss_snake="start";
   lastRenderTime = 0;
   snake = [[10, 10]];
   direction = "up";
@@ -71,7 +72,7 @@ function draw() {
     const snakeElement = document.createElement("div");
     snakeElement.style.gridRowStart = element[1];
     snakeElement.style.gridColumnStart = element[0];
-    snakeElement.style.backgroundColor = "black";
+    snakeElement.style.backgroundColor = "white";
     document
       .getElementsByClassName("snake-container")[0]
       .appendChild(snakeElement);

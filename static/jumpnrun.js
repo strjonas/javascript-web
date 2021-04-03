@@ -50,11 +50,11 @@ class enemys {
 let enemyList = [];
 
 function new_enemy() {
-  let oneortwo = Math.round(Math.random());
+  let oneortwo = Math.round(Math.random()*3);
   let size = Math.round(Math.random() * 10 + 10);
   const ene = new enemys(
     510,
-    oneortwo == 1 ? 352 : 300,
+    oneortwo == 1 ? context.canvas.height-150 : context.canvas.height-100,
     VELOCITY,
     size,
     size,
@@ -73,27 +73,17 @@ function jump_update() {
   mapindex++;
 }
 
-function enter_pressed(event) {}
 var context;
 var canvas;
 canvas = document.querySelector("canvas");
 context = canvas.getContext("2d");
 
-const screenHeight = window.innerHeight / 2;
-const screenWidth = window.innerWidth / 2;
-if (screenHeight > screenWidth) {
-  context.canvas.height = screenWidth;
-  context.canvas.width = screenWidth;
-} else {
-  context.canvas.height = screenHeight;
-  context.canvas.width = screenHeight;
-}
 
 rectangle = {
   radius: 20,
   jumping: true,
   x: 50,
-  y: 100,
+  y: context.canvas.height-100,
   y_velocity: 0,
 };
 
@@ -116,20 +106,14 @@ function jump_draw() {
   rectangle.y_velocity += 0.8; // gravity
   rectangle.y += rectangle.y_velocity;
   rectangle.y_velocity *= 0.9; // friction
-  if (rectangle.y > 400 - 16 - 32) {
+  if (rectangle.y > context.canvas.height-50 - 16 - 32) {
     rectangle.jumping = false;
-    rectangle.y = 400 - 16 - 32;
+    rectangle.y = context.canvas.height-50 - 16 - 32;
     rectangle.y_velocity = 0;
   }
   context.fillStyle = B_COLOR;
 
-  const screenHeight = window.innerHeight / 2;
-  const screenWidth = window.innerWidth / 2;
-  if (screenHeight > screenWidth) {
-    context.fillRect(0, 0, screenWidth, screenWidth);
-  } else {
-    context.fillRect(0, 0, screenHeight, screenHeight);
-  }
+  context.fillRect(0, 0, context.canvas.height, context.canvas.height);
 
   context.fillStyle = "#ff0000"; // hex for red
   context.beginPath();
@@ -208,15 +192,9 @@ function jump_stop() {
   lastRenderTime = 0;
   index = 0;
   context.fillStyle = B_COLOR;
-  const screenHeight = window.innerHeight / 2;
-  const screenWidth = window.innerWidth / 2;
-  if (screenHeight > screenWidth) {
-    context.fillRect(0, 0, screenWidth, screenWidth);
-  } else {
-    context.fillRect(0, 0, screenHeight, screenHeight);
-  }
+  context.fillRect(0, 0, context.canvas.height, context.canvas.height);
   rectangle.x = 50;
-  rectangle.y = 100;
+  rectangle.y = context.canvas.height-100;
   mapindex = 0;
   run_jump = false;
 }
