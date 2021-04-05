@@ -102,14 +102,11 @@ function handleStart() {
 function handleEnd() {
   controller.up = false;
 }
-function handleCancel() {}
-function handleMove() {}
 
 function startup() {
   var el = document.getElementById("canvas");
   el.addEventListener("touchstart", handleStart, false);
   el.addEventListener("touchend", handleEnd, false);
-  el.addEventListener("touchmove", handleMove, false);
 }
 
 document.addEventListener("DOMContentLoaded", startup);

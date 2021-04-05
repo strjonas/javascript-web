@@ -5,7 +5,7 @@ var direction = "up";
 var food = null;
 
 function loose() {
-  ss_snake="start";
+  ss_snake = "start";
   lastRenderTime = 0;
   snake = [[10, 10]];
   direction = "up";
@@ -66,6 +66,16 @@ function update() {
     snake.unshift(snake[0]);
   }
 }
+function switchDirectionTouch(event) {
+ 
+}
+
+function startup() {
+  var el = document.getElementById("snake-container");
+  el.addEventListener("touchstart", switchDirectionTouch, false);
+}
+
+document.addEventListener("DOMContentLoaded", startup);
 
 function draw() {
   snake.forEach((element) => {
@@ -108,12 +118,12 @@ function snake_main(currenTime) {
 let ss_snake = "start";
 
 function snake_start() {
-    document.getElementById("snake_start").innerHTML = "Stop";
-    if(ss_snake == "stop"){
-        snake_stop();
-        return;
-    }
-    ss_snake = "stop";
+  document.getElementById("snake_start").innerHTML = "Stop";
+  if (ss_snake == "stop") {
+    snake_stop();
+    return;
+  }
+  ss_snake = "stop";
   jump_stop();
   run_jump = false;
   run = true;
@@ -121,9 +131,9 @@ function snake_start() {
 }
 
 function snake_stop() {
-    document.getElementById("snake_start").innerHTML = "Start";
-    ss_snake="start";
-    lastRenderTime = 0;
+  document.getElementById("snake_start").innerHTML = "Start";
+  ss_snake = "start";
+  lastRenderTime = 0;
   snake = [[10, 10]];
   direction = "up";
   food = null;
