@@ -1,12 +1,14 @@
-var run = false;
-var lastRenderTime = 0;
-var snake = [[10, 10]];
-var direction = "up";
-var food = null;
+let run = false;
+let lastRenderTime_Snake = 0;
+let snake = [[10, 10]];
+let direction = "up";
+let food = null;
+const FPS = 150;
+let ss_snake = "start";
 
 function loose() {
   ss_snake = "start";
-  lastRenderTime = 0;
+  lastRenderTime_Snake = 0;
   snake = [[10, 10]];
   direction = "up";
   food = null;
@@ -66,16 +68,53 @@ function update() {
     snake.unshift(snake[0]);
   }
 }
+
 function switchDirectionTouch(event) {
- 
+  const element = document.elementFromPoint(
+    event.touches[0].clientX,
+    event.touches[0].clientY
+  );
+  let gBCR = element.getBoundingClientRect();
+  let snakeHeadPos = snake[snake.length - 1];
+  let xTouch = event.touches[0].clientX;
+  let yTouch = event.touches[0].clientY;
+  let cells = 25;
+  let posOLx = gBCR.x;
+  let posOLy = gBCR.y;
+  let gBRCsize = gBCR.width;
+  let cellSize = gBRCsize / cells;
+
+  let snakeHeadY = posOLy + (snakeHeadPos[1] - 1) * cellSize;
+  let snakeHeadX = posOLx + (snakeHeadPos[0] - 1) * cellSize;
+  console.log(snakeHeadY);
+  console.log(snakeHeadX);
+
+  console.log(yTouch);
+  console.log(xTouch);
+
+  let diffY = Math.abs(yTouch - snakeHeadY);
+  let diffX = Math.abs(xTouch - snakeHeadX);
+  if (diffY > diffX) {
+    if ((direction == "down") | (direction == "up")) return;
+    if (yTouch > snakeHeadY) {
+      direction = "down";
+    } else {
+      direction = "up";
+    }
+  } else {
+    if ((direction == "right") | (direction == "left")) return;
+    if (xTouch > snakeHeadX) {
+      direction = "right";
+    } else {
+      direction = "left";
+    }
+  }
 }
 
 function startup() {
   var el = document.getElementById("snake-container");
   el.addEventListener("touchstart", switchDirectionTouch, false);
 }
-
-document.addEventListener("DOMContentLoaded", startup);
 
 function draw() {
   snake.forEach((element) => {
@@ -104,18 +143,16 @@ function snake_main(currenTime) {
     window.requestAnimationFrame(snake_main);
   }
 
-  const milliSecondsSinceLastRender = currenTime - lastRenderTime;
-  if (milliSecondsSinceLastRender < 100) {
+  const milliSecondsSinceLastRender = currenTime - lastRenderTime_Snake;
+  if (milliSecondsSinceLastRender < FPS) {
     return;
   }
 
   update();
   document.getElementsByClassName("snake-container")[0].innerHTML = "";
   draw();
-  lastRenderTime = currenTime;
+  lastRenderTime_Snake = currenTime;
 }
-
-let ss_snake = "start";
 
 function snake_start() {
   document.getElementById("snake_start").innerHTML = "Stop";
@@ -133,10 +170,12 @@ function snake_start() {
 function snake_stop() {
   document.getElementById("snake_start").innerHTML = "Start";
   ss_snake = "start";
-  lastRenderTime = 0;
+  lastRenderTime_Snake = 0;
   snake = [[10, 10]];
   direction = "up";
   food = null;
   run = false;
   run = false;
 }
+
+document.addEventListener("DOMContentLoaded", startup);

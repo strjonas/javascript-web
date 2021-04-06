@@ -1,21 +1,27 @@
 const gameField = "_____________#____________#_________#_______#__________";
-var run_jump = false;
-var VELOCITY = 5;
-var map_vel = 80;
-
+const field = document.getElementsByClassName("field")[0];
+const fieldL = gameField.length - 21;
+const mapLen = gameField.length;
 const B_COLOR = "#232323";
+
+let context;
+let canvas;
+let run_jump = false;
+let VELOCITY = 5;
+let map_vel = 80;
+let loop;
+let ss = "start";
+let enemyList = [];
+var lastRenderTime = 0;
+let index = 0;
+let mapindex = 0;
+
+canvas = document.querySelector("canvas");
+context = canvas.getContext("2d");
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
-const field = document.getElementsByClassName("field")[0];
-const fieldL = gameField.length - 21;
-
-var lastRenderTime = 0;
-var index = 0;
-
-var mapindex = 0;
-const mapLen = gameField.length;
 
 function setGameField() {
   index += 1;
@@ -47,8 +53,6 @@ class enemys {
   }
 }
 
-let enemyList = [];
-
 function new_enemy() {
   let oneortwo = Math.round(Math.random() * 3);
   let size = Math.round(Math.random() * 10 + 10);
@@ -72,11 +76,6 @@ function jump_update() {
   }
   mapindex++;
 }
-
-var context;
-var canvas;
-canvas = document.querySelector("canvas");
-context = canvas.getContext("2d");
 
 rectangle = {
   radius: 20,
@@ -108,8 +107,6 @@ function startup() {
   el.addEventListener("touchstart", handleStart, false);
   el.addEventListener("touchend", handleEnd, false);
 }
-
-document.addEventListener("DOMContentLoaded", startup);
 
 function jump_draw() {
   if (controller.up && rectangle.jumping == false) {
@@ -180,13 +177,6 @@ function main(currenTime) {
   lastRenderTime = currenTime;
 }
 
-window.addEventListener("keydown", controller.keyListener);
-window.addEventListener("keyup", controller.keyListener);
-
-var loop;
-
-let ss = "start";
-
 function jump_start() {
   if (ss == "stop") {
     jump_stop();
@@ -219,3 +209,7 @@ function jump_stop() {
   mapindex = 0;
   run_jump = false;
 }
+
+document.addEventListener("DOMContentLoaded", startup);
+window.addEventListener("keydown", controller.keyListener);
+window.addEventListener("keyup", controller.keyListener);

@@ -1,36 +1,64 @@
 window.onresize = function (event) {
-  
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
-  if(window.innerWidth < 1150){
-    if(window.innerWidth > window.innerHeight){
-      context.canvas.height = window.innerHeight*0.8 ;
-    context.canvas.width = window.innerHeight*0.8 ;
-    document
-      .getElementById("main-container")
-      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
-    document
-      .getElementById("snake-container")
-      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
-    document
-      .getElementById("jumpnrun-container")
-      .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
-    return 
-    }else{
-      context.canvas.height = window.innerWidth*0.8 ;
-      context.canvas.width = window.innerWidth*0.8 ;
+  if (window.innerWidth < 1150) {
+    if (window.innerWidth > window.innerHeight) {
+      context.canvas.height = window.innerHeight * 0.8;
+      context.canvas.width = window.innerHeight * 0.8;
       document
         .getElementById("main-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
       document
         .getElementById("snake-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
       document
         .getElementById("jumpnrun-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
-      return 
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
+      return;
+    } else {
+      context.canvas.height = window.innerWidth * 0.8;
+      context.canvas.width = window.innerWidth * 0.8;
+      document
+        .getElementById("main-container")
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
+      document
+        .getElementById("snake-container")
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
+      document
+        .getElementById("jumpnrun-container")
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
+      return;
     }
-    
   }
   if (screenHeight > screenWidth) {
     context.canvas.height = screenWidth;
@@ -89,40 +117,67 @@ window.onkeypress = function (event) {
   }
 };
 
-function firstLoad(){
-  
+function firstLoad() {
   const screenHeight = window.innerHeight / 2;
   const screenWidth = window.innerWidth / 2;
-  if(window.innerWidth < 1150){
-    if(window.innerHeight > window.innerWidth){
-      context.canvas.height = window.innerWidth*0.8 ;
-      context.canvas.width = window.innerWidth*0.8 ;
+  if (window.innerWidth < 1150) {
+    if (window.innerHeight > window.innerWidth) {
+      context.canvas.height = window.innerWidth * 0.8;
+      context.canvas.width = window.innerWidth * 0.8;
       document
         .getElementById("main-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
       document
         .getElementById("snake-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
       document
         .getElementById("jumpnrun-container")
-        .setAttribute("style", `width:${window.innerWidth*0.8}px;height:${window.innerWidth*0.8}px`);
-      return
-    }else{
-      context.canvas.height = window.innerHeight*0.8 ;
-      context.canvas.width = window.innerHeight*0.8 ;
+        .setAttribute(
+          "style",
+          `width:${window.innerWidth * 0.8}px;height:${
+            window.innerWidth * 0.8
+          }px`
+        );
+      return;
+    } else {
+      context.canvas.height = window.innerHeight * 0.8;
+      context.canvas.width = window.innerHeight * 0.8;
       document
         .getElementById("main-container")
-        .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
       document
         .getElementById("snake-container")
-        .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
       document
         .getElementById("jumpnrun-container")
-        .setAttribute("style", `width:${window.innerHeight*0.8}px;height:${window.innerHeight*0.8}px`);
-      return
+        .setAttribute(
+          "style",
+          `width:${window.innerHeight * 0.8}px;height:${
+            window.innerHeight * 0.8
+          }px`
+        );
+      return;
     }
-
-
   }
   if (screenHeight > screenWidth) {
     context.canvas.height = screenWidth;
@@ -162,5 +217,4 @@ function firstLoad(){
       );
   }
 }
-
-firstLoad();
+window.addEventListener("DOMContentLoaded", firstLoad);
